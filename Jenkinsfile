@@ -11,6 +11,7 @@ pipeline {
             }
             steps {
                 sh '''
+                    echo "Build stage""
                     ls -la
                     node --version
                     npm --version
@@ -23,7 +24,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    touch build/index.html
+                    echo "Test stage""
+                    test -f build/index.html
                     npm test
                 '''
             }
