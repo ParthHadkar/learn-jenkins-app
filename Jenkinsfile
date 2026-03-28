@@ -85,9 +85,6 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                CI_ENVIRONMENT_URL = 'https://warm-pegasus-257bc5.netlify.app'
-            }
             steps {
                 sh '''
                     npm install netlify-cli
@@ -106,6 +103,9 @@ pipeline {
                     reuseNode true
                     //args '-u root:root'
                 }
+            }
+            environment {
+                CI_ENVIRONMENT_URL = 'https://warm-pegasus-257bc5.netlify.app'
             }
             //testing comments
             steps {
