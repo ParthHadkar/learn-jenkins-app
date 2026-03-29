@@ -103,6 +103,9 @@ pipeline {
                     //args '-u root:root'
                 }
             }
+            environment {
+                CI_ENVIRONMENT_URL = "Staging_Url_TO_Be_Set"
+            }
             //testing comments
             steps {
                 sh '''
