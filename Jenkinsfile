@@ -79,24 +79,7 @@ pipeline {
 
             }
         }
-        stage('Deploy Staging') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    
-                    
-                '''
-                script {
-                    env.STAGING_URL = sh(script: "node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
-                }
-            }
-        }
-        stage('Staging E2E') {
+        stage('Deploy Staging E2E') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
