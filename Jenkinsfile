@@ -59,7 +59,7 @@ pipeline {
                     }
                 }
 
-                stage('Local E2E') {
+                /* stage('Local E2E') { // old way
                     agent {
                         docker {
                             image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
@@ -72,6 +72,29 @@ pipeline {
                         sh '''
                             npm install serve
                             node_modules/.bin/serve -s build &
+                            sleep 10
+                            npx playwright test --reporter=html
+                        '''
+                    }
+                    post {
+                        always {
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Local Report', reportTitles: '', useWrapperFileDirectly: true])
+                        }
+                    }
+                }*/
+
+                stage('Local E2E') {
+                    agent {
+                        docker {
+                            image 'my-playwright'
+                            reuseNode true
+                            //args '-u root:root'
+                        }
+                    }
+                    //testing comments
+                    steps {
+                        sh '''
+                            serve -s build &
                             sleep 10
                             npx playwright test --reporter=html
                         '''
